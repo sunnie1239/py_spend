@@ -19,3 +19,9 @@ print('product list 有幾個項目: ', len(product))
 # 	print(product[i][0], '價格是', product[i][1])
 for p in product :
 	print(p[0], '價格是', p[1])
+
+# 寫入檔案
+with open('spend.csv', 'w', encoding='utf-8') as f:
+	f.write('商品,價格\n')
+	for p in product:
+		f.write(p[0] + ',' + p[1] + '\n')
