@@ -15,5 +15,7 @@ print('product list 的資料內容: ', product)
 print('product list 有幾個項目: ', len(product))
 
 # 依序列出資料內容
-for i in range(len(product)) :
-	print(product[i][0], '價格是', product[i][1])
+# for i in range(len(product)) :
+# 	print(product[i][0], '價格是', product[i][1])
+for p in product :
+	print(p[0], '價格是', p[1])
