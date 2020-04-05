@@ -1,5 +1,17 @@
 product = []
 
+# 讀取檔案並存入list
+with open('spend.csv', 'r', encoding='utf-8') as f:
+	for line in f:
+		if '商品,價格' in line:
+			continue
+		# s = line.strip().split(',')
+		# product.append(s)
+		# 可化簡為以下
+		item, price = line.strip().split(',') 
+		product.append([item, price])
+
+# 取得新資料
 while True :
 	item = input("今天買了什麼? (離開則輸入q) ")
 	if item == 'q' :
