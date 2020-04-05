@@ -1,15 +1,22 @@
+import os
+
 product = []
 
-# 讀取檔案並存入list
-with open('spend.csv', 'r', encoding='utf-8') as f:
-	for line in f:
-		if '商品,價格' in line:
-			continue
-		# s = line.strip().split(',')
-		# product.append(s)
-		# 可化簡為以下
-		item, price = line.strip().split(',') 
-		product.append([item, price])
+# 檢查檔案是否存在
+if os.path.isfile('spend.csv'):
+	print('檔案已存在')
+	# 讀取檔案並存入list
+	with open('spend.csv', 'r', encoding='utf-8') as f:
+		for line in f:
+			if '商品,價格' in line:
+				continue
+			# s = line.strip().split(',')
+			# product.append(s)
+			# 可化簡為以下
+			item, price = line.strip().split(',') 
+			product.append([item, price])
+else:
+	print('檔案不存在')
 
 # 取得新資料
 while True :
