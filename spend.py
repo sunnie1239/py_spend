@@ -1,46 +1,61 @@
 import os
 
-product = []
-
-# 檢查檔案是否存在
-if os.path.isfile('spend.csv'):
-	print('檔案已存在')
-	# 讀取檔案並存入list
-	with open('spend.csv', 'r', encoding='utf-8') as f:
+# 讀取檔案並存入list
+def read_file(filename):
+	product = []
+	with open(filename, 'r', encoding='utf-8') as f:
 		for line in f:
-			if '商品,價格' in line:
+			if '商品,價格' in line: # 遇到標題則跳至下一迴圈
 				continue
-			# s = line.strip().split(',')
-			# product.append(s)
-			# 可化簡為以下
 			item, price = line.strip().split(',') 
 			product.append([item, price])
-else:
-	print('檔案不存在')
+	return product
 
 # 取得新資料
-while True :
-	item = input("今天買了什麼? (離開則輸入q) ")
-	if item == 'q' :
-		break
-	price = input('請輸入金額: ')
-	# p = []
-	# p.append(item)
-	# p.append(price)
-	# product.append(p)
-	product.append([item, price]) # 二維list
+def user_input(product):
+	while True :
+		item = input("今天買了什麼? (離開則輸入q) ")
+		if item == 'q' :
+			break
+		price = input('請輸入金額: ')
+		# p = []
+		# p.append(item)
+		# p.append(price)
+		# product.append(p)
+		product.append([item, price]) # 二維list
 
-print('product list 的資料內容: ', product)    
-print('product list 有幾個項目: ', len(product))
+	print('product list 的資料內容: ', product)    
+	print('product list 有幾個項目: ', len(product))
+	return product
 
 # 依序列出資料內容
-# for i in range(len(product)) :
-# 	print(product[i][0], '價格是', product[i][1])
-for p in product :
-	print(p[0], '價格是', p[1])
+def print_data(product):
+	# for i in range(len(product)) :
+	# 	print(product[i][0], '價格是', product[i][1])
+	for p in product :
+		print(p[0], '價格是', p[1])
 
 # 寫入檔案
-with open('spend.csv', 'w', encoding='utf-8') as f:
-	f.write('商品,價格\n')
-	for p in product:
-		f.write(p[0] + ',' + p[1] + '\n')
+def write_file(filename, product):
+	with open(filename, 'w', encoding='utf-8') as f:
+		f.write('商品,價格\n')
+		for p in product:
+			f.write(p[0] + ',' + p[1] + '\n')
+
+# 主程式
+def main():
+	filename = 'spend.csv'
+	# 檢查檔案是否存在
+	if os.path.isfile(filename): 
+		print('檔案已存在')
+		product = read_file(filename)
+	else:
+		print('檔案不存在')
+		product = []
+
+	product = user_input(product)
+	print_data(product)
+	write_file(filename, product)
+
+#程式執行
+main()
