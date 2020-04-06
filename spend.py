@@ -2,7 +2,6 @@ import os
 
 # 讀取檔案並存入list
 def read_file(filename):
-	product = []
 	with open(filename, 'r', encoding='utf-8') as f:
 		for line in f:
 			if '商品,價格' in line: # 遇到標題則跳至下一迴圈
@@ -45,13 +44,13 @@ def write_file(filename, product):
 # 主程式
 def main():
 	filename = 'spend.csv'
+	product = []
 	# 檢查檔案是否存在
 	if os.path.isfile(filename): 
 		print('檔案已存在')
 		product = read_file(filename)
 	else:
 		print('檔案不存在')
-		product = []
 
 	product = user_input(product)
 	print_data(product)
